@@ -14,5 +14,11 @@
   "exclude": [
     "src/test.ts",
     "src/**/*.spec.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "trace": true,
+    "strictInjectionParameters": true,
+    "preserveWhitespaces": true,
+    "fullTemplateTypeCheck": true
+  }
 }

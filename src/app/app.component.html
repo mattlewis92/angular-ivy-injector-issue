@@ -1,536 +1,1069 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .toolbar {
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 32px auto;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(black, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: 100vh;
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
-
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Welcome</span>
-    <div class="spacer"></div>
-  <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
-    
-    <svg id="twitter-logo" height="24" data-name="Logo — FIXED" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-      <defs>
-        <style>
-          .cls-1 {
-            fill: none;
-          }
-
-          .cls-2 {
-            fill: #ffffff;
-          }
-        </style>
-      </defs>
-      <rect class="cls-1" width="400" height="400" />
-      <path class="cls-2" d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"
-      />
-    </svg>
-    
-  </a>
-</div>
-
-<div class="content" role="main">
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-
-    <svg id="rocket" alt="Rocket Ship" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
-      <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#dd0031"/>
-        <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
-          <path id="Path_33" data-name="Path 33" d="M3.4,42.615a3.084,3.084,0,0,0,3.553,3.553,21.419,21.419,0,0,0,12.215-6.107L9.511,30.4A21.419,21.419,0,0,0,3.4,42.615Z" transform="translate(0.371 3.363)" fill="#fff"/>
-          <path id="Path_34" data-name="Path 34" d="M53.3,3.221A3.09,3.09,0,0,0,50.081,0,48.227,48.227,0,0,0,18.322,13.437c-6-1.666-14.991-1.221-18.322,7.218A33.892,33.892,0,0,1,9.439,25.1l-.333.666a3.013,3.013,0,0,0,.555,3.553L23.985,43.641a2.9,2.9,0,0,0,3.553.555l.666-.333A33.892,33.892,0,0,1,32.647,53.3c8.55-3.664,8.884-12.326,7.218-18.322A48.227,48.227,0,0,0,53.3,3.221ZM34.424,9.772a6.439,6.439,0,1,1,9.106,9.106,6.368,6.368,0,0,1-9.106,0A6.467,6.467,0,0,1,34.424,9.772Z" transform="translate(0 0.005)" fill="#fff"/>
-        </g>
-      </g>
-    </svg>
-
-    <span>{{ title }} app is running!</span>
-
-    <svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
-      <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
-    </svg>
-
-  </div>
-
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-
-      <span>Learn Angular</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-
-      <span>CLI Documentation</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-
-      <span>Angular Blog</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  <div class="card-container">
-    <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>New Component</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Angular Material</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Add Dependency</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Run and Watch Tests</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Build for Production</span>
-    </div>
-  </div>
-
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>ng generate component xyz</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build --prod</pre>
-  </div>
-
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Animations" href="https://angular.io/guide/animations" target="_blank" rel="noopener">
-      <svg id="Group_20" data-name="Group 20" xmlns="http://www.w3.org/2000/svg" width="21.813" height="23.453" viewBox="0 0 21.813 23.453">
-        <path id="Path_15" data-name="Path 15" d="M4099.584,972.736h0l-10.882,3.9,1.637,14.4,9.245,5.153,9.245-5.153,1.686-14.4Z" transform="translate(-4088.702 -972.736)" fill="#ffa726"/>
-        <path id="Path_16" data-name="Path 16" d="M4181.516,972.736v23.453l9.245-5.153,1.686-14.4Z" transform="translate(-4170.633 -972.736)" fill="#fb8c00"/>
-        <path id="Path_17" data-name="Path 17" d="M4137.529,1076.127l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1058.315)" fill="#ffe0b2"/>
-        <path id="Path_18" data-name="Path 18" d="M4137.529,1051.705l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1036.757)" fill="#fff3e0"/>
-        <path id="Path_19" data-name="Path 19" d="M4137.529,1027.283l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1015.199)" fill="#fff"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="CLI" href="https://cli.angular.io/" target="_blank" rel="noopener">
-      <svg alt="Angular CLI Logo" xmlns="http://www.w3.org/2000/svg" width="21.762" height="23.447" viewBox="0 0 21.762 23.447">
-        <g id="Group_21" data-name="Group 21" transform="translate(0)">
-          <path id="Path_20" data-name="Path 20" d="M2660.313,313.618h0l-10.833,3.9,1.637,14.4,9.2,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-2649.48 -313.618)" fill="#37474f"/>
-          <path id="Path_21" data-name="Path 21" d="M2741.883,313.618v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-2731.05 -313.618)" fill="#263238"/>
-          <path id="Path_22" data-name="Path 22" d="M2692.293,379.169h11.724V368.618h-11.724Zm11.159-.6h-10.608v-9.345h10.621v9.345Z" transform="translate(-2687.274 -362.17)" fill="#fff"/>
-          <path id="Path_23" data-name="Path 23" d="M2709.331,393.688l.4.416,2.265-2.28-2.294-2.294-.4.4,1.893,1.893Z" transform="translate(-2702.289 -380.631)" fill="#fff"/>
-          <rect id="Rectangle_12" data-name="Rectangle 12" width="3.517" height="0.469" transform="translate(9.709 13.744)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Augury" href="https://augury.rangle.io/" target="_blank" rel="noopener">
-      <svg alt="Angular Augury Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.81" height="23.447" viewBox="0 0 21.81 23.447">
-        <defs>
-          <clipPath id="clip-path">
-            <rect id="Rectangle_13" data-name="Rectangle 13" width="10.338" height="10.27" fill="none"/>
-          </clipPath>
-        </defs>
-        <g id="Group_25" data-name="Group 25" transform="translate(0)">
-          <path id="Path_24" data-name="Path 24" d="M3780.155,311.417h0l-10.881,3.9,1.637,14.4,9.244,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-3769.274 -311.417)" fill="#4a3493"/>
-          <path id="Path_25" data-name="Path 25" d="M3862.088,311.417v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-3851.207 -311.417)" fill="#311b92"/>
-          <g id="Group_24" data-name="Group 24" transform="translate(6.194 6.73)" opacity="0.5">
-            <g id="Group_23" data-name="Group 23" transform="translate(0 0)">
-              <g id="Group_22" data-name="Group 22" clip-path="url(#clip-path)">
-                <path id="Path_26" data-name="Path 26" d="M3832.4,373.252a5.168,5.168,0,1,1-5.828-4.383,5.216,5.216,0,0,1,2.574.3,3.017,3.017,0,1,0,3.252,4.086Z" transform="translate(-3822.107 -368.821)" fill="#fff"/>
-              </g>
-            </g>
-          </g>
-          <path id="Path_27" data-name="Path 27" d="M3830.582,370.848a5.162,5.162,0,1,1-3.254-4.086,3.017,3.017,0,1,0,3.252,4.086Z" transform="translate(-3814.311 -359.969)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Protractor" href="https://www.protractortest.org/" target="_blank" rel="noopener">
-      <svg alt="Angular Protractor Logo" xmlns="http://www.w3.org/2000/svg" width="21.81" height="23.447" viewBox="0 0 21.81 23.447">
-        <g id="Group_26" data-name="Group 26" transform="translate(0)">
-          <path id="Path_28" data-name="Path 28" d="M4620.155,311.417h0l-10.881,3.9,1.637,14.4,9.244,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-4609.274 -311.417)" fill="#e13439"/>
-          <path id="Path_29" data-name="Path 29" d="M4702.088,311.417v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-4691.207 -311.417)" fill="#b52f32"/>
-          <path id="Path_30" data-name="Path 30" d="M4651.044,369.58v-.421h1.483a7.6,7.6,0,0,0-2.106-5.052l-1.123,1.123-.3-.3,1.122-1.121a7.588,7.588,0,0,0-4.946-2.055v1.482h-.421v-1.485a7.589,7.589,0,0,0-5.051,2.058l1.122,1.121-.3.3-1.123-1.123a7.591,7.591,0,0,0-2.106,5.052h1.482v.421h-1.489v1.734h15.241V369.58Zm-10.966-.263a4.835,4.835,0,0,1,9.67,0Z" transform="translate(-4634.008 -355.852)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
-      <svg alt="Meetup Logo" xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
-        <path id="logo--mSwarm" d="M21.221,14.95A4.393,4.393,0,0,1,17.6,19.281a4.452,4.452,0,0,1-.8.069c-.09,0-.125.035-.154.117a2.939,2.939,0,0,1-2.506,2.091,2.868,2.868,0,0,1-2.248-.624.168.168,0,0,0-.245-.005,3.926,3.926,0,0,1-2.589.741,4.015,4.015,0,0,1-3.7-3.347,2.7,2.7,0,0,1-.043-.38c0-.106-.042-.146-.143-.166a3.524,3.524,0,0,1-1.516-.69A3.623,3.623,0,0,1,2.23,14.557a3.66,3.66,0,0,1,1.077-3.085.138.138,0,0,0,.026-.2,3.348,3.348,0,0,1-.451-1.821,3.46,3.46,0,0,1,2.749-3.28.44.44,0,0,0,.355-.281,5.072,5.072,0,0,1,3.863-3,5.028,5.028,0,0,1,3.555.666.31.31,0,0,0,.271.03A4.5,4.5,0,0,1,18.3,4.7a4.4,4.4,0,0,1,1.334,2.751,3.658,3.658,0,0,1,.022.706.131.131,0,0,0,.1.157,2.432,2.432,0,0,1,1.574,1.645,2.464,2.464,0,0,1-.7,2.616c-.065.064-.051.1-.014.166A4.321,4.321,0,0,1,21.221,14.95ZM13.4,14.607a2.09,2.09,0,0,0,1.409,1.982,4.7,4.7,0,0,0,1.275.221,1.807,1.807,0,0,0,.9-.151.542.542,0,0,0,.321-.545.558.558,0,0,0-.359-.534,1.2,1.2,0,0,0-.254-.078c-.262-.047-.526-.086-.787-.138a.674.674,0,0,1-.617-.75,3.394,3.394,0,0,1,.218-1.109c.217-.658.509-1.286.79-1.918a15.609,15.609,0,0,0,.745-1.86,1.95,1.95,0,0,0,.06-1.073,1.286,1.286,0,0,0-1.051-1.033,1.977,1.977,0,0,0-1.521.2.339.339,0,0,1-.446-.042c-.1-.092-.2-.189-.307-.284a1.214,1.214,0,0,0-1.643-.061,7.563,7.563,0,0,1-.614.512A.588.588,0,0,1,10.883,8c-.215-.115-.437-.215-.659-.316a2.153,2.153,0,0,0-.695-.248A2.091,2.091,0,0,0,7.541,8.562a9.915,9.915,0,0,0-.405.986c-.559,1.545-1.015,3.123-1.487,4.7a1.528,1.528,0,0,0,.634,1.777,1.755,1.755,0,0,0,1.5.211,1.35,1.35,0,0,0,.824-.858c.543-1.281,1.032-2.584,1.55-3.875.142-.355.28-.712.432-1.064a.548.548,0,0,1,.851-.24.622.622,0,0,1,.185.539,2.161,2.161,0,0,1-.181.621c-.337.852-.68,1.7-1.018,2.552a2.564,2.564,0,0,0-.173.528.624.624,0,0,0,.333.71,1.073,1.073,0,0,0,.814.034,1.22,1.22,0,0,0,.657-.655q.758-1.488,1.511-2.978.35-.687.709-1.37a1.073,1.073,0,0,1,.357-.434.43.43,0,0,1,.463-.016.373.373,0,0,1,.153.387.7.7,0,0,1-.057.236c-.065.157-.127.316-.2.469-.42.883-.846,1.763-1.262,2.648A2.463,2.463,0,0,0,13.4,14.607Zm5.888,6.508a1.09,1.09,0,0,0-2.179.006,1.09,1.09,0,0,0,2.179-.006ZM1.028,12.139a1.038,1.038,0,1,0,.01-2.075,1.038,1.038,0,0,0-.01,2.075ZM13.782.528a1.027,1.027,0,1,0-.011,2.055A1.027,1.027,0,0,0,13.782.528ZM22.21,6.95a.882.882,0,0,0-1.763.011A.882.882,0,0,0,22.21,6.95ZM4.153,4.439a.785.785,0,1,0,.787-.78A.766.766,0,0,0,4.153,4.439Zm8.221,18.22a.676.676,0,1,0-.677.666A.671.671,0,0,0,12.374,22.658ZM22.872,12.2a.674.674,0,0,0-.665.665.656.656,0,0,0,.655.643.634.634,0,0,0,.655-.644A.654.654,0,0,0,22.872,12.2ZM7.171-.123A.546.546,0,0,0,6.613.43a.553.553,0,1,0,1.106,0A.539.539,0,0,0,7.171-.123ZM24.119,9.234a.507.507,0,0,0-.493.488.494.494,0,0,0,.494.494.48.48,0,0,0,.487-.483A.491.491,0,0,0,24.119,9.234Zm-19.454,9.7a.5.5,0,0,0-.488-.488.491.491,0,0,0-.487.5.483.483,0,0,0,.491.479A.49.49,0,0,0,4.665,18.936Z" transform="translate(0 0.123)" fill="#f64060"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Join the Conversation on Gitter" href="https://gitter.im/angular/angular" target="_blank" rel="noopener">
-      <svg alt="Gitter Logo" xmlns="http://www.w3.org/2000/svg" width="19.447" height="19.447" viewBox="0 0 19.447 19.447">
-        <g id="Group_40" data-name="Group 40" transform="translate(-1612 -405)">
-          <rect id="Rectangle_19" data-name="Rectangle 19" width="19.447" height="19.447" transform="translate(1612 405)" fill="#e60257"/>
-          <g id="gitter" transform="translate(1617.795 408.636)">
-            <g id="Group_33" data-name="Group 33" transform="translate(0 0)">
-              <rect id="Rectangle_15" data-name="Rectangle 15" width="1.04" height="9.601" transform="translate(2.304 2.324)" fill="#fff"/>
-              <rect id="Rectangle_16" data-name="Rectangle 16" width="1.04" height="9.601" transform="translate(4.607 2.324)" fill="#fff"/>
-              <rect id="Rectangle_17" data-name="Rectangle 17" width="1.04" height="4.648" transform="translate(6.91 2.324)" fill="#fff"/>
-              <rect id="Rectangle_18" data-name="Rectangle 18" width="1.04" height="6.971" transform="translate(0 0)" fill="#fff"/>
-            </g>
-          </g>
-        </g>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-      Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
-        <div class="github-star-badge">
-            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Star
+<div class="upgrade-plans {{ modifier }}">
+  <div class="upgrade-plans__item" *ngIf="planId === freePlan || downgrading">
+    <div class="upgrade-plans__item-title">free</div>
+    <div class="upgrade-plans__item-cost">
+      <div class="upgrade-plans__item-cost-value">
+        <div class="upgrade-plans__item-cost-value-symbol">
+          {{ currencySymbol }}
         </div>
-      </a>
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </a>
-  </footer>
+        0
+      </div>
+    </div>
+    <div class="upgrade-plans__item-period">forever</div>
 
-  <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
-  </svg>
+    <div class="upgrade-plans__item-free-img">
+      <svg width="180" height="116" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fill-rule="evenodd">
+          <rect
+            stroke="#E6E6E6"
+            fill="#FFF"
+            x="1.5"
+            y="11.5"
+            width="170"
+            height="104"
+            rx="4"
+          />
+          <path d="M2 30h169" stroke="#E6E6E6" stroke-linecap="square" />
+          <path
+            d="M11 25a4.3 4.3 0 0 0 3.9-2.35c.06-.15.09-.28.1-.37a1.5 1.5 0 0 0-.62-1.24l-.07-.04c0 1.7-1.48 3.09-3.3 3.09H11c-1.83 0-3.31-1.39-3.31-3.09l-.07.04c-.18.11-.6.49-.62 1.24.01.09.04.22.1.37A4.3 4.3 0 0 0 11 25M11 18.28L15 21c.01-.19-.02-.98-1.2-2l-2.36-1.86A.78.78 0 0 0 11 17h-.02c-.21 0-.37.1-.43.14L8.21 19C7 20.02 6.99 20.81 7 21L11 18.28"
+            fill="#7B68EE"
+          />
+          <path
+            d="M2 30h24v86H5a3 3 0 0 1-3-3V30z"
+            fill="#FCFCFC"
+            opacity=".88"
+          />
+          <path
+            d="M32 36h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H32a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path
+            fill="#D8D8D8"
+            d="M5 35h15v3H5zM5 42h12v2H5zM38 39h43v2H38zM5 47h14v2H5zM5 52h12v2H5z"
+          />
+          <path d="M34 39a1 1 0 0 1 0 2 1 1 0 0 1 0-2z" fill="#A875FF" />
+          <circle fill="#FFF" cx="160.5" cy="39.5" r="2.5" />
+          <path
+            d="M32 49h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H32a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M38 52h33v2H38z" />
+          <rect fill="#A875FF" x="33" y="52" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="160.5" cy="52.5" r="2.5" />
+          <rect fill="#F2F2F2" x="31" y="61" width="134" height="8" rx="1" />
+          <path fill="#D8D8D8" d="M38 64h49v2H38z" />
+          <rect fill="#FF7104" x="33" y="64" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="160.5" cy="65.5" r="2.5" />
+          <rect fill="#F2F2F2" x="31" y="74" width="134" height="8" rx="1" />
+          <path fill="#D8D8D8" d="M38 77h64v2H38z" />
+          <rect fill="#4094F6" x="33" y="77" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="160.5" cy="78.5" r="2.5" />
+          <path
+            d="M32 88h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H32a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M38 91h11v2H38z" />
+          <path d="M34 91a1 1 0 0 1 0 2 1 1 0 0 1 0-2z" fill="#4094F6" />
+          <circle fill="#FFF" cx="160.5" cy="91.5" r="2.5" />
+          <path
+            d="M32 102h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H32a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M38 105h33v2H38z" />
+          <rect fill="#4094F6" x="33" y="105" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="160.5" cy="105.5" r="2.5" />
+          <circle fill="#7D69EE" cx="161" cy="21" r="4" />
+          <text font-family="GothamPro, Gotham Pro" font-size="12" fill="#FFF">
+            <tspan x="159" y="25">+</tspan>
+          </text>
+          <path
+            d="M70 17h31a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H70a2 2 0 0 1-2-2v-3c0-1.1.9-2 2-2z"
+            fill="#F2F2F2"
+          />
+          <path
+            d="M81 17h8a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-3c0-1.1.9-2 2-2z"
+            fill="#D8D8D8"
+          />
+          <circle fill="#6ACA4F" cx="162" cy="18" r="18" />
+          <text
+            font-family="GothamPro-Medium, Gotham Pro"
+            font-size="13"
+            font-weight="400"
+            fill="#FFF"
+          >
+            <tspan x="148" y="23">FRE</tspan>
+            <tspan x="148" y="34">E</tspan>
+          </text>
+          <rect
+            stroke="#E6E6E6"
+            fill="#FFF"
+            x=".5"
+            y="11.5"
+            width="170"
+            height="104"
+            rx="4"
+          />
+          <path d="M2 30h169" stroke="#E6E6E6" stroke-linecap="square" />
+          <path
+            d="M10 25a4.3 4.3 0 0 0 3.9-2.35c.06-.15.09-.28.1-.37a1.5 1.5 0 0 0-.62-1.24l-.07-.04c0 1.7-1.48 3.09-3.3 3.09H10c-1.83 0-3.31-1.39-3.31-3.09l-.07.04c-.18.11-.6.49-.62 1.24.01.09.04.22.1.37A4.3 4.3 0 0 0 10 25M10 18.28L14 21c.01-.19-.02-.98-1.2-2l-2.36-1.86A.78.78 0 0 0 10 17h-.02c-.21 0-.37.1-.43.14L7.21 19C6 20.02 5.99 20.81 6 21L10 18.28"
+            fill="#7B68EE"
+          />
+          <path
+            d="M1 30h24v85H4a3 3 0 0 1-3-3V30z"
+            fill="#FCFCFC"
+            opacity=".88"
+          />
+          <path
+            d="M31 36h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H31a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path
+            fill="#D8D8D8"
+            d="M5 35h15v3H5zM5 42h12v2H5zM37 39h43v2H37zM5 47h14v2H5zM5 52h12v2H5z"
+          />
+          <path d="M34 39a1 1 0 0 1 0 2 1 1 0 0 1 0-2z" fill="#A875FF" />
+          <circle fill="#FFF" cx="159.5" cy="39.5" r="2.5" />
+          <path
+            d="M31 49h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H31a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M37 52h33v2H37z" />
+          <rect fill="#A875FF" x="33" y="52" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="159.5" cy="52.5" r="2.5" />
+          <path
+            d="M31 61h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H31a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M37 64h49v2H37z" />
+          <rect fill="#FF7104" x="33" y="64" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="159.5" cy="65.5" r="2.5" />
+          <path
+            d="M31 74h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H31a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M37 77h64v2H37z" />
+          <rect fill="#4094F6" x="33" y="77" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="159.5" cy="78.5" r="2.5" />
+          <path
+            d="M31 88h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H31a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M37 91h11v2H37z" />
+          <path d="M34 91a1 1 0 0 1 0 2 1 1 0 0 1 0-2z" fill="#4094F6" />
+          <circle fill="#FFF" cx="159.5" cy="91.5" r="2.5" />
+          <path
+            d="M31 102h132a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H31a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"
+            fill="#F2F2F2"
+          />
+          <path fill="#D8D8D8" d="M37 105h33v2H37z" />
+          <rect fill="#4094F6" x="33" y="105" width="2" height="2" rx="1" />
+          <circle fill="#FFF" cx="159.5" cy="105.5" r="2.5" />
+          <circle fill="#7D69EE" cx="160" cy="21" r="4" />
+          <text font-family="GothamPro, Gotham Pro" font-size="12" fill="#FFF">
+            <tspan x="158" y="25">+</tspan>
+          </text>
+          <path
+            d="M69 17h31a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H69a2 2 0 0 1-2-2v-3c0-1.1.9-2 2-2z"
+            fill="#F2F2F2"
+          />
+          <rect fill="#D8D8D8" x="78" y="17" width="12" height="7" rx="2" />
+          <circle fill="#6ACA4F" cx="161" cy="18" r="18" />
+          <path
+            d="M147.9 22v-7h5.21v1.12h-3.98v1.91h3.53v1.12h-3.53V22h-1.23zm6.56 0v-7h3.12c1.64 0 2.6.88 2.6 2.23 0 1.15-.69 1.84-1.67 2.12L160.4 22h-1.45l-1.74-2.44h-1.52V22h-1.23zm1.23-3.53h1.8c.88 0 1.44-.46 1.44-1.19 0-.75-.54-1.16-1.45-1.16h-1.79v2.35zm6 3.53v-7h5.19v1.1h-3.96v1.82h3.51v1.1h-3.51v1.88h4.01V22h-5.24zm6.7 0v-7h5.19v1.1h-3.96v1.82h3.51v1.1h-3.51v1.88h4.01V22h-5.24z"
+            fill="#FFF"
+          />
+        </g>
+      </svg>
+    </div>
 
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Upload up to 100mb of file attachments (you always get unlimited tasks, this limit is only for attachments)"
+      tooltipLifeTime="15000"
+    >
+      <span *ngIf="storage" class="upgrade-plans__item-included-used"
+      >{{ storage }}/</span
+      ><b>{{ totalStorage }} </b> storage
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Tasks do not count against storage"
+      tooltipLifeTime="15000"
+    >
+      <b>Unlimited</b> Tasks
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="That's right! There's no catch"
+      tooltipLifeTime="15000"
+    >
+      <b>Unlimited</b> Users
+    </div>
+
+    <div
+      class="upgrade-plans__item-btn upgrade-plans__item-btn_active"
+      *ngIf="
+        serviceStatus !== serviceTrial &&
+        serviceStatus !== serviceSuspended &&
+        !downgrading
+      "
+    >
+      <svg width="19" height="15" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M5.918 11.202L1.48 6.764 0 8.244l5.918 5.917L18.6 1.48 17.12 0z"
+          fill-rule="evenodd"
+        />
+      </svg>
+      active
+    </div>
+    <div
+      [cuTooltip]="
+        overLimit
+          ? 'You are over your storage limit and cannot downgrade'
+          : null
+      "
+      *ngIf="!downgrading"
+    >
+      <button
+        (click)="downgradePlan(freePlan)"
+        [disabled]="overLimit"
+        class="upgrade-plans__item-btn upgrade-plans__item-btn_active downgrade-trial"
+        *ngIf="
+          serviceStatus === serviceTrial || serviceStatus === serviceSuspended
+        "
+      >
+        downgrade
+      </button>
+    </div>
+    <div
+      [cuTooltip]="
+        overLimit
+          ? 'You are over your storage limit and cannot downgrade'
+          : null
+      "
+      *ngIf="downgrading"
+    >
+      <button
+        (click)="downgradePlan(freePlan)"
+        [disabled]="overLimit"
+        class="upgrade-plans__item-btn"
+      >
+        downgrade
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="upgrade-plans__item"
+    *ngIf="planId === freePlan || planId === unlimitedPlan || downgrading"
+    [class.upgrade-plans__item_upper]="
+      planId === freePlan || planId === unlimitedPlan
+    "
+  >
+    <div
+      class="upgrade-plans__item-badge upgrade-plans__item-badge_popular"
+      *ngIf="planId === freePlan || planId === unlimitedPlan"
+    >
+      popular
+    </div>
+    <div class="upgrade-plans__item-title">unlimited</div>
+    <div class="upgrade-plans__item-cost">
+      <div class="upgrade-plans__item-cost-value" [@interval]="interval">
+        <div class="upgrade-plans__item-cost-value-symbol">
+          {{ currencySymbol }}
+        </div>
+        <span
+          *ngIf="
+            planId !== unlimitedPlan || (planId === unlimitedPlan && isTrial)
+          "
+        >{{ unlimitedLocalPrice | number: '1.0-2' }}</span
+        >
+        <span
+          *ngIf="planId === unlimitedPlan && !isTrial"
+        >{{ ppu | number: '1.0-2' }}</span
+        >
+      </div>
+    </div>
+    <div class="upgrade-plans__item-period">member per month</div>
+
+    <div class="upgrade-plans__item-pricing-switch-divider">
+      <div
+        class="upgrade-plans__item-pricing-switch"
+        (click)="togglePaymentInterval()"
+        *ngIf="
+          planId !== unlimitedPlan || (planId === unlimitedPlan && isTrial)
+        "
+      >
+        <div
+          class="upgrade-plans__item-pricing-switch-label"
+          [ngClass]="{ active: interval === 'yearly' }"
+        >
+          Annually
+        </div>
+        <div class="upgrade-plans__item-pricing-switch-tabs">
+          <div class="upgrade-plans__item-pricing-switch-tabs-nav">
+            <div
+              class="upgrade-plans__item-pricing-switch-tabs-nav-item"
+              [ngClass]="{ active: interval === 'yearly' }"
+            ></div>
+            <div
+              class="upgrade-plans__item-pricing-switch-tabs-nav-item"
+              [ngClass]="{ active: interval === 'monthly' }"
+            ></div>
+          </div>
+        </div>
+        <div
+          class="upgrade-plans__item-pricing-switch-label"
+          [ngClass]="{ active: interval === 'monthly' }"
+        >
+          Monthly
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Upload unlimited files and attachments to ClickUp"
+      tooltipLifeTime="15000"
+    >
+      <b>Unlimited</b> storage
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Access to all ClickUp reports that can be customized and exported"
+      tooltipLifeTime="15000"
+    >
+      All Reporting
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Cloud storage integrations unlocked"
+      tooltipLifeTime="15000"
+    >
+      <b>Google Drive</b>, <b>Dropbox</b>, <b>OneDrive</b> & <b>Box</b>
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Free plans are limited to 100 custom fields uses, paid plans get unlimited"
+      tooltipLifeTime="15000"
+    >
+      <b>Unlimited</b> Custom Fields
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Get unlimited use of Goals and Portfolios"
+      tooltipLifeTime="15000"
+    >
+      <b>Goals</b> and <b>Portfolios</b>
+    </div>
+
+    <div class="upgrade-plans__item-included">
+      <span
+        cuTooltip="Choose what people can do in ClickUp with custom permissions for view only, edit, full access, and more!"
+        tooltipLifeTime="15000"
+      >Set <b>Permissions</b></span
+      >
+      &
+      <span
+        cuTooltip="Hide custom fields, time estimates, time logs, and tags from guests"
+        tooltipLifeTime="15000"
+      >Guest <b>Visibility</b></span
+      >
+    </div>
+
+    <div class="upgrade-plans__item-included">
+      <b>Future Recurring Tasks</b> on Calendar
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Free plans are limited to 100 saved views, you get Unlimited!"
+      tooltipLifeTime="15000"
+    >
+      <b>Unlimited</b> views
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Add calculations for columns in List view such as sum, average, range, and more!"
+      tooltipLifeTime="15000"
+    >
+      List View <b>column calculations</b>
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Send reminders to other people and track their progress"
+      tooltipLifeTime="15000"
+    >
+      <b>Delegate</b> reminders
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Get access to ClickUp's renowned Gantt and Box views in your Workspace for ultimate resource management"
+      tooltipLifeTime="15000"
+    >
+      <b>Gantt</b> & <b>Box</b> views
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      [cuTooltip]="
+        'You\'ll always get unlimited view-only guests. Plus you\'ll get ' +
+        unlimitedGuestsBase +
+        ' guests and ' +
+        unlimitedGuestsPerSeat +
+        ' more for each additional member.\n Note: You can always buy ' +
+        unlimitedGuestsPerSeat +
+        ' more guests for just ' +
+        currencySymbol +
+        (unlimitedLocalPrice | number: '1.0-2') +
+        ' per month.'
+      "
+      tooltipLifeTime="25000"
+    >
+      <b>{{ unlimitedGuestsBase }} Guests</b> + {{ unlimitedGuestsPerSeat }} per
+      extra seat
+    </div>
+
+    <ng-container
+      *ngIf="planId !== unlimitedPlan || (planId === unlimitedPlan && isTrial)"
+    >
+      <div
+        *ngIf="planId === freePlan || isTrial"
+        class="upgrade-plans__item-btn"
+        (click)="goToStepTwo('professional')"
+      >
+        upgrade
+      </div>
+      <div
+        *ngIf="planId !== freePlan && planId !== unlimitedPlan && downgrading"
+        (click)="downgradePlan(unlimitedPlan)"
+        class="upgrade-plans__item-btn"
+      >
+        downgrade
+      </div>
+    </ng-container>
+    <ng-container *ngIf="planId === unlimitedPlan">
+      <div class="upgrade-plans__item-btn upgrade-plans__item-btn_active">
+        <svg width="19" height="15" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.918 11.202L1.48 6.764 0 8.244l5.918 5.917L18.6 1.48 17.12 0z"
+            fill-rule="evenodd"
+          />
+        </svg>
+        {{ isTrial ? 'trial' : 'active' }}
+      </div>
+      <div
+        *ngIf="!downgrading"
+        (click)="startDowngrade()"
+        class="upgrade-plans__downgrade"
+      >
+        downgrade plan
+      </div>
+      <div *ngIf="downgrading" class="billing__cancel-plan">
+        <a class="billing__cancel-plan-link" id="intercom-launcher"
+        >Cancel plan</a
+        >
+      </div>
+    </ng-container>
+    <div class="upgrade-plans__item-contact-sales" *ngIf="planId === freePlan">
+      <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fill-rule="evenodd">
+          <path class="cu-fill" d="M0 0v14l3.23-2L7 14l3.77-2L14 14V0z" />
+          <path
+            d="M4.9 5.85c-.87 0-1.47-.73-1.47-1.61 0-.87.6-1.61 1.5-1.61.88 0 1.47.73 1.47 1.6 0
+          .88-.6 1.62-1.5 1.62zM4.08 9l4.6-6.3h.9L4.97 9h-.9zm4.64.07c-.88 0-1.47-.73-1.47-1.6 0-.88.6-1.62
+          1.5-1.62.88 0 1.47.73 1.47 1.61 0 .87-.6 1.61-1.5 1.61zM4.94 5.16c.42 0
+          .67-.42.67-.92s-.29-.92-.7-.92c-.42 0-.67.42-.67.92 0 .51.3.92.7.92zm3.8 3.22c.43 0
+          .68-.42.68-.92s-.29-.92-.7-.92c-.42 0-.67.42-.67.92 0 .51.29.92.7.92z"
+            fill="#FFF"
+          />
+        </g>
+      </svg>
+      <a
+        class="upgrade-plans__item-contact-sales-link for-deal"
+        id="intercom-launcher"
+      >Or let's make a deal</a
+      >
+    </div>
+  </div>
+
+  <div
+    class="upgrade-plans__item"
+    *ngIf="
+      planId === freePlan ||
+      planId === unlimitedPlan ||
+      planId === businessPlan ||
+      downgrading
+    "
+    [class.upgrade-plans__item_upper]="planId === businessPlan"
+  >
+    <div class="upgrade-plans__item-badge" *ngIf="planId === businessPlan">
+      best
+    </div>
+    <div class="upgrade-plans__item-title">business</div>
+    <div class="upgrade-plans__item-cost">
+      <div class="upgrade-plans__item-cost-value" [@interval]="interval">
+        <div class="upgrade-plans__item-cost-value-symbol">
+          {{ currencySymbol }}
+        </div>
+        <span
+          *ngIf="
+            planId !== businessPlan || (planId === businessPlan && isTrial)
+          "
+        >{{ businessLocalPrice | number: '1.0-2' }}</span
+        >
+        <span
+          *ngIf="planId === businessPlan && !isTrial"
+        >{{ ppu | number: '1.0-2' }}</span
+        >
+      </div>
+    </div>
+    <div class="upgrade-plans__item-period">member per month</div>
+
+    <div
+      class="upgrade-plans__item-pricing-switch-divider"
+      *ngIf="planId !== businessPlan || (planId === businessPlan && isTrial)"
+    >
+      <div
+        class="upgrade-plans__item-pricing-switch"
+        (click)="togglePaymentInterval()"
+      >
+        <div
+          class="upgrade-plans__item-pricing-switch-label"
+          [ngClass]="{ active: interval === 'yearly' }"
+        >
+          Annually
+        </div>
+        <div class="upgrade-plans__item-pricing-switch-tabs">
+          <div class="upgrade-plans__item-pricing-switch-tabs-nav">
+            <div
+              class="upgrade-plans__item-pricing-switch-tabs-nav-item"
+              [ngClass]="{ active: interval === 'yearly' }"
+            ></div>
+            <div
+              class="upgrade-plans__item-pricing-switch-tabs-nav-item"
+              [ngClass]="{ active: interval === 'monthly' }"
+            ></div>
+          </div>
+        </div>
+        <div
+          class="upgrade-plans__item-pricing-switch-label"
+          [ngClass]="{ active: interval === 'monthly' }"
+        >
+          Monthly
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="upgrade-plans__item-business-img"
+      *ngIf="planId === businessPlan || (planId === businessPlan && !isTrial)"
+    >
+      <svg viewBox="0 0 30 82" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fill-rule="evenodd">
+          <ellipse fill="#F4F4F4" cx="14" cy="79" rx="9" ry="3" />
+          <path
+            d="M27.98 48.66c-.03-.15-10.2-.4-11.94-.4C12.3 48.3 1.13 47.02 1.08 47c-.15-.02-.05.47-.04.53.08.51.21 1.02.35 1.52a132.11 132.11 0 0 0 2.87 8.66 219.87 219.87 0 0 0 4.3 10.89 103 103 0 0 0 1.48 3.25c.44.93.9 1.85 1.39 2.75.38.7.79 1.4 1.25 2.06.3.43.63.86 1.05 1.19.32.24.76.21.74-.25-.06-1.9.09-3.85.12-5.76l.09-6.72.05-5.66v-1.27c0-.16-.05-1.02.3-.95.38.09.24 1.31.24 1.6l.02 1.98.03 5.52c0 1.98.02 3.96.04 5.94 0 1.46.02 2.93.05 4.39 0 .25-.1.86.05 1.09.08.13.25.22.41.2.38-.02.58-.5.73-.78 1.14-2.15 2.34-4.28 3.44-6.45.54-1.07 1.04-2.16 1.54-3.25.51-1.1.94-2.25 1.5-3.32l.02-.07a83.4 83.4 0 0 0 3.69-10.08c.4-1.42.88-2.8 1.12-4.26.06-.35.12-.73.07-1.09"
+            fill="#E3E3E3"
+          />
+          <path
+            d="M26.98 48.49c-.02-.15-9.87-.41-11.56-.4C11.81 48.12 2 46.96 2 47c.24 1.56 4.31 12.92 4.76 14.14.46 1.24 6.02 16.38 6.43 16.7.31.25.73.22.72-.24-.06-1.92.08-3.87.12-5.8a833 833 0 0 0 .08-6.76l.05-5.69v-1.28c0-.16.02-.74.28-.95 1.67-1.28 1.22 7.74 1.23 9.59.02 2-.56 11.27-.4 11.26.36-.03.55-.52.7-.8 1.1-2.16 2.26-4.3 3.32-6.49.53-1.07 1.02-2.17 1.5-3.26.5-1.1.9-2.26 1.44-3.34l.03-.07a86.03 86.03 0 0 0 3.57-10.14c.4-1.42.85-2.82 1.09-4.28.05-.36.11-.74.06-1.1"
+            fill="#EFEFEF"
+          />
+          <path
+            d="M1.02 47.65a.47.47 0 0 0 .04.34c.1.18.4.17.56.2.23.06.47.06.7.12.24.07.48.1.72.17l3.5.83a82.69 82.69 0 0 0 5.93 1.1c.24.04.5.03.72.14.97.47 2.17.43 3.22.44 2.31.03 4.63 0 6.94-.09.51-.02 1.02-.07 1.52 0 .52.06 1.12.02 1.63-.1.42-.1.63-.68.41-1.1-.22-.42-.68-.35-1.06-.32-3.95.26-8.02.75-11.92.31-2.53-.28-5.03-.8-7.52-1.39-.4-.01-.84-.2-1.22-.3l-1.27-.3c-.74-.19-1.45-.45-2.19-.66a.65.65 0 0 0-.28-.03c-.24.04-.38.41-.43.64"
+            fill="#E3E3E3"
+          />
+          <path
+            d="M1.17 48.39c3.55.77 7.1 1.52 10.7 2.11 3.13.53 6.24.53 9.41.48 1.82-.03 3.63-.08 5.44-.14.31-.01.41-.4.04-.39-3.36.12-6.74.22-10.1.15-3.27-.08-6.49-.78-9.67-1.42-1.88-.37-3.76-.77-5.63-1.17-.28-.06-.54.3-.19.38"
+            fill="#6A79A8"
+          />
+          <path
+            d="M26.96 48.38c-.09-.13-.37-.11-.5-.13-.41-.04-.83-.05-1.23-.07-1.3-.06-2.6-.1-3.9-.14-2.27-.07-4.54-.05-6.81-.14-2.88-.1-5.77-.58-8.62-1.01-1.3-.2-2.6-.4-3.9-.62-.46-.08-1.2-.36-1.67-.24-.5.12-.3.81-.25 1.17.13 1 .42 1.97.7 2.94.72 2.45 1.54 4.86 2.4 7.26 1.69 4.8 3.46 9.62 5.64 14.23.5 1.07 1.04 2.12 1.6 3.17.53.99 1.1 2.1 1.94 2.86.37.33 1.01.55 1.35.04.15-.22.13-.55.14-.8.11-1.97.13-3.94.17-5.9.1-4.53.04-9.08.3-13.6 0-.07.03-.18.02-.24-.04-.12.14-.16-.1.03l-.37.07c-.19-.07-.09.19-.09.3v.57c.02.48.02.96.02 1.44l.02 3.18a616.62 616.62 0 0 0 .09 11.83c0 .75.01 1.49.1 2.24.05.52.1 1.13.76 1.15 1.13.04 1.52-1.6 1.9-2.37.84-1.73 1.7-3.45 2.55-5.18 1.6-3.27 3.13-6.6 4.42-10.01a82.1 82.1 0 0 0 1.99-5.91c.3-1.04.62-2.08.9-3.13.24-.94.54-1.96.45-2.95-.02-.24-.62-.1-.6.16.08.87-.2 1.79-.4 2.63-.24.9-.5 1.77-.76 2.66a83.44 83.44 0 0 1-1.6 4.98 101.61 101.61 0 0 1-4.02 9.58c-.76 1.6-1.55 3.17-2.34 4.75l-1.17 2.38c-.14.29-.28.58-.4.87-.13.28-.25.77-.5.96-.6.46-.6-.84-.64-1.21-.08-1.04-.04-2.1-.06-3.14l-.05-5.42-.02-6.15c0-1.05 0-2.1-.02-3.16 0-.24.15-1.3-.17-1.42-.1-.04-.29 0-.37.07-.24.2-.16.69-.17.95l-.06 2.36-.15 7.29c-.04 2.4-.09 4.81-.16 7.22-.02.73-.04 1.46-.08 2.2 0 .1 0 .2-.02.3v.12c-.03.04.01.05-.04.1-.1.11-.3-.12-.4-.23-.75-.72-1.26-1.73-1.75-2.63-2.33-4.3-4.1-8.87-5.81-13.44-.86-2.28-1.68-4.58-2.45-6.89C2 52.03 1.09 49.67.72 47.3l-.08-.6c0-.07 0-.26-.02-.3v-.04c.03-.16-.1-.14-.35.06h.05c.14.1.5.1.67.12l3.07.5c2.84.45 5.7.89 8.56 1.15 2.01.18 4.04.14 6.05.19 2.43.06 4.86.1 7.27.26l.39.03c.16 0 .14.06.07-.03.14.2.72-.02.56-.25"
+            fill="#6A79A8"
+          />
+          <path
+            d="M7.4 50.24a5.74 5.74 0 0 1-1.38 3.67c-.14.16.44.09.55-.04A5.96 5.96 0 0 0 8 50.06c0-.13-.6-.03-.6.18M21 51.32a7.32 7.32 0 0 0 1.57 3.62c.16.19.58-.12.37-.36a6.95 6.95 0 0 1-1.45-3.43c-.05-.29-.53-.13-.49.17"
+            fill="#6A79A8"
+          />
+          <path
+            d="M1 47.02A64.67 64.67 0 0 1 4.01 30.9c.21-.65.69-1.44.78-2.1.1-.63-.36-1.16-.64-1.66.54-.54 1.26-.82 1.84-1.3.52-.44.67-1.2 1.03-1.78a14.51 14.51 0 0 1 2.57-3.27c1.81-1.66 4.13-2.3 6.45-1.36.23.09.45.2.67.3C22.96 23 26.26 36.65 28 50c0 0-11.36-.07-15.11-.55C9.7 49.03 1 47.02 1 47.02"
+            fill="#EFEFEF"
+          />
+          <path
+            d="M20 12.45C19.99 6.67 17.3 2 13.98 2 10.67 2 8 6.69 8 12.46v1.04c0 3.2.3 5.43.8 6.98 1.04 3.2 5.1 4.52 5.1 4.52s4.14-1.31 5.2-4.17c.57-1.56.9-3.89.9-7.35v-1.03"
+            fill="#EFEFEF"
+          />
+          <path
+            d="M2 47.35c.23-4.78 1.65-11.67 3.37-17.5.1-.36-.23-.2-.69-.82-.3-.41-.8-1.74-.8-1.74 1-.54 2.23-1.07 2.7-2.15.01-.05.04-.1.1-.13.1-.04.2.05.26.13a11.83 11.83 0 0 0 4.27 3.1c1.7.79 3.56 1.53 5.48 1.3.2-.02.87-1.25 1.06-1.28.72-.1.97.99 1.84.9 1.27-.13 2.23-3.1 2.23-3.1C24.9 31.96 26.81 41.05 28 50c0 0-11.42-.07-15.2-.55-3.19-.4-10.8-2.1-10.8-2.1"
+            fill="#FFF"
+          />
+          <path
+            d="M19.92 24.21L18.62 22l-2.87 2.44-8.02-2.37c-.23.33-.52.66-.72 1.03-.2.38 1.96 2.49 2.97 3.28.92.73 2.9 1.72 3.97 2.16.45.2.8.33 1.29.4.03 0 .72.08.72.06l.36-2.73 2.18 2.18s1.9-1.79 1.42-4.24"
+            fill="#FFF"
+          />
+          <path
+            d="M20 13.57v-1.04C19.99 6.7 17.3 2 14.02 2c-1.42 0-2.24.76-2.68 2.01a36.26 36.26 0 0 0-2.09 10.23c-.06 1.3-.01 2.81 0 3.61 0 .87.04 2.84.04 2.84s-.41-.02-.42.03v.1c-.53.19-.96.46-.85.85.17.6 1.14 2.29 1.86 2.84.38.3.79.54 1.22.74.64.3 1.32.5 2 .64 1.15.23 2.17.09 3.26-.3 1.12-.4 3.07-2.39 3.18-3.67.03-.4-.16-.68-.46-.89l.02-.05c.58-1.57.9-3.92.9-7.4"
+            fill="#FFF"
+          />
+          <path
+            d="M17.03 25.99c.67.65 1.32 1.31 2 1.95.13.12.39.04.5-.06a4.15 4.15 0 0 0 1.4-3.78c-.03-.2-.6-.07-.56.15a3.87 3.87 0 0 1-1.3 3.53l.5-.06c-.69-.64-1.35-1.3-2.02-1.96-.14-.14-.68.07-.52.23M16.38 26.24l-.1 2.58.43-.21c-.97-.18-2.23-.6-3.23-.99a16.8 16.8 0 0 1-5.87-3.55c-.18-.18-.77.03-.57.24a17.19 17.19 0 0 0 5.9 3.6c1.14.46 2.33.86 3.55 1.09.14.02.42-.07.42-.22L17 26.2c0-.28-.62-.2-.62.04"
+            fill="#6A79A8"
+          />
+          <path
+            d="M17.3 30.68c.02 1.92.03 3.85.06 5.77.04 2.27-.37 4.4-1.36 6.23.28.63 2.05 2.62 2.14 3.32.43-.43 2.1-2.27 2.53-2.73.87-.9-.2-6.8-.66-8.52-.22-.86-1.12-4.8-1.99-4.75l-.32.02c-.24.02-.43.3-.4.61v.05"
+            fill="#EFEFEF"
+          />
+          <path
+            d="M17.24 30.74c.19 1.92.37 3.84.58 5.77.24 2.27.01 4.43-.82 6.34.34.6 2.3 2.46 2.46 3.15.4-.46 1.92-2.44 2.32-2.93.8-.98-.82-6.78-1.43-8.47-.3-.85-1.56-4.72-2.44-4.6l-.32.05c-.25.03-.4.32-.36.64a.9.9 0 0 1 0 .05"
+            fill="#BBDFF5"
+          />
+          <path
+            d="M17.22 30.96l.46 4.94c.16 1.66.23 3.3-.1 4.95-.1.4-.2.8-.32 1.18-.06.2-.29.56-.26.77.04.28.44.64.6.84.54.65 1.42 1.41 1.64 2.25.05.17.32.12.4.01.45-.56.86-1.14 1.28-1.72.3-.42.75-.87.95-1.35.18-.45.13-1.01.1-1.48-.06-.76-.19-1.51-.34-2.26a32.19 32.19 0 0 0-2.42-7.9c-.2-.4-.5-1.08-.99-1.17-.61-.12-1.07.33-1 .94.03.21.46.1.44-.12-.04-.31.17-.6.48-.45.18.08.33.38.42.54.34.55.57 1.17.8 1.78a40.12 40.12 0 0 1 2.15 8.58c.04.45.11 1.02-.05 1.45-.19.48-.65.94-.96 1.36-.4.55-.8 1.12-1.23 1.66l.4.01c-.21-.82-1-1.54-1.53-2.17-.2-.24-.67-.66-.66-.96.01-.31.27-.74.35-1.06.1-.32.17-.64.23-.97.28-1.53.23-3.06.08-4.6-.17-1.72-.32-3.44-.48-5.17-.02-.2-.46-.1-.44.12"
+            fill="#6A79A8"
+          />
+          <path
+            d="M17.14 28.23c.08-.19.23-.3.5-.18.42.18.78.6 1.1.88.27.25.41.43.01.64-.35.19-.8.28-1.19.4-.6.2-.59-.84-.54-1.15.03-.18.05-.42.12-.59"
+            fill="#BBDFF5"
+          />
+          <path
+            d="M17.5 28.28c.09-.21.82.6.9.7.07.06.16.13.2.22.06.18-.1.27-.23.33-.2.09-.43.18-.65.22-.53.11-.31-1.18-.22-1.47.03-.13-.33-.08-.37.05-.12.4-.23 1.12.01 1.5.1.15.26.19.43.16.32-.05.69-.2.99-.34.17-.08.47-.22.44-.47-.02-.13-.14-.23-.22-.32-.14-.15-.27-.3-.42-.43-.33-.34-.95-.72-1.23-.1-.04.1.31.06.37-.05M17 19.18c.04.2-.3.48-.47.6-.45.3-1.12.26-1.64.06-.25-.1-1.01-.54-.87-.76.11-.18.74-.01.94 0 .43.05.85.04 1.27-.01.23-.03.64-.13.75.07l.02.04"
+            fill="#6A79A8"
+          />
+          <path
+            d="M17.16 5.22c.45-.56 1.18-1.5 1.07-2.22.45.75.68 1.64 1.1 2.42.24.44.47.88.59 1.36.18.73.05 1.5-.23 2.2-.28.71-.7 1.36-1.12 2 .1.07.16-.1.14-.2l-.26-1.36c-.08.1-.4.29-.48.39l-.53.66a1 1 0 0 0-.13-.97l-.18.02c-.21.35-.6.54-.95.79l.22-.09a1.73 1.73 0 0 0-.28-.64c-.26-.37-.69-.63-.94-1-.4-.57-.05-.56.18-1.12.33-.83 1.23-1.53 1.8-2.24"
+            fill="#BBDFF5"
+          />
+          <path
+            d="M5.26 6.72l.21-.37c-.83.26-1.62.2-2.47.17.9-.03 1.74-.44 2.47-.97C7.9 3.8 9.68.95 12.67.13a4.4 4.4 0 0 1 3.4.63c.88.52 2.38 1.25 1.8 2.44a14.51 14.51 0 0 1-6.28 6.48c-.4.2-.87.33-1.15.67-.14.18-.55 1-.51 1.22-.02-.1-.53-1.21-.64-1.08-.39.43-.74.98-.91 1.55-.15.5.22 1.2-.04 1.61-.67-.14-.84-.98-1-1.56-.15-.5-.92.35-1.06.49-.37.36-1.4.95-1.5 1.42l.52-2.2c-.63.22-1.27.42-1.92.6.53-.14 1.08-1.3 1.3-1.77.3-.65.67-1.46.8-2.17-.3.1-.58.29-.9.35-.34.06-.72-.01-.95-.27a8.43 8.43 0 0 0 1.63-1.82"
+            fill="#BBDFF5"
+          />
+          <path
+            d="M6.7 29.62c-1.12-.67-1.7-1.99-2.1-3.19l-.1.22c.49-.37.98-.71 1.55-.96.51-.22.62-.37.89-.85.78-1.4 1.56-2.85 2.7-3.99a.2.2 0 0 0 .04-.17c-.77-2.63-.76-5.48-.73-8.2.02-2.9.6-6.2 2.45-8.48.66-.81 1.55-1.52 2.6-1.55 1.07-.04 2 .6 2.7 1.37 1.92 2.16 2.58 5.42 2.67 8.26.1 2.94.14 6.17-.8 9-.11.32.47.32.56.07.55-1.67.72-3.45.8-5.2.1-2.1.14-4.27-.2-6.35-.45-2.83-1.93-7.38-5.31-7.6-3.32-.2-5.04 3.93-5.64 6.66-.46 2.07-.46 4.2-.41 6.3a34.16 34.16 0 0 0 .4 4.54c.08.39.28.84.29 1.22 0 .06.06-.12.02.01-.02.06-.2.2-.23.24l-.25.25c-.27.32-.5.68-.72 1.02-.48.75-.93 1.52-1.37 2.3l-.38.68c-.02.05.21-.08 0-.04-.14.03-.29.13-.42.19-.57.25-1.1.62-1.6 1-.07.05-.13.14-.1.22.44 1.28 1.05 2.67 2.24 3.38.23.13.74-.18.45-.35"
+            fill="#6A79A8"
+          />
+          <path
+            d="M3.78 28.47A57.13 57.13 0 0 0 0 46.03c.01.02.03.04.06.04a196 196 0 0 0 10.78 2.19c4.07.67 8.29.61 12.4.69l4.25.05c.1 0 .53-.05.5-.2-.57-4.25-1.28-8.48-2.3-12.64a50.56 50.56 0 0 0-3.6-10.5c-.73-1.5-1.6-2.93-2.69-4.2-.1-.11-.55.03-.6.15a5.62 5.62 0 0 1-1.34 2.01c-.56.47-1.24.47-1.95.42-2.42-.19-4.43-1.64-6.31-3.01-.14-.1-.68.13-.58.2 2.24 1.64 4.7 3.3 7.64 3.07 1.58-.13 2.65-1.41 3.16-2.79l-.6.16c2.1 2.45 3.42 5.5 4.46 8.5a78.77 78.77 0 0 1 2.95 11.57c.45 2.4.83 4.8 1.15 7.21l.5-.2c-4.84-.04-9.74-.02-14.57-.47-2.84-.26-5.66-.93-8.44-1.52l-3.63-.78c-.11-.02-.6-.06-.67-.15.02.03.07-.46.07-.47a42.2 42.2 0 0 1 .19-2.15 58.81 58.81 0 0 1 3.55-14.84c.05-.12-.54-.06-.6.1"
+            fill="#6A79A8"
+          />
+          <path
+            d="M13.62 50.77a3.77 3.77 0 0 1 4.37-3.28 4.07 4.07 0 0 1 3.38 4.32c-.03.3.6.2.61-.06a4.44 4.44 0 0 0-4.13-4.74A4.48 4.48 0 0 0 13 50.83c-.04.3.58.2.62-.06"
+            fill="#6A79A8"
+          />
+          <path fill="#978AD3" d="M28 70L4 67.28 6 49l24 2.72L28 70" />
+          <path fill="#B6A6FB" d="M27 70L4 67.4 6 49l23 2.6L27 70" />
+          <path
+            fill="#A598E0"
+            d="M27.91 62l-12.07-.29L4 59.22 5.09 49 29 51.78 27.91 62"
+          />
+          <path
+            d="M27.78 69.63l-8.23-.9L6.43 67.3l-3-.33.2.15L5.4 51.35l.25-2.2-.43.22 8.23.9 13.12 1.44 3 .33-.2-.15-1.77 15.76-.25 2.2c-.03.26.6.15.62-.07l1.78-15.76.25-2.2c.01-.11-.1-.14-.2-.15l-8.22-.9-13.12-1.44-3-.33c-.12-.01-.42.07-.43.22L3.25 64.98 3 67.18c-.01.11.1.14.2.15l8.22.9 13.12 1.44 3 .33c.26.03.66-.32.24-.37"
+            fill="#6A79A8"
+          />
+          <path
+            fill="#CAC6DA"
+            d="M28.04 61l-12.13-.4L4 58.4l.96-8.4L29 52.6l-.96 8.4"
+          />
+          <path
+            fill="#D3C9FF"
+            d="M29.03 61l-11.62-.34L6 58.5l.97-8.5L30 52.5l-.97 8.5"
+          />
+          <path
+            d="M28.95 60.75l-6.4-.2-4.1-.14-1.13-.03c-.23 0-.1 0-.28-.03-2.42-.39-4.83-.9-7.24-1.34l-3.59-.66c-.11-.02-.58-.03-.66-.12.07.07.11-.52.12-.62l.87-7.56-.5.2 12.78 1.38 8.12.88 2.21.23c.07.01.3 0 .36.04-.18-.14-.17.5-.18.61l-.87 7.56c0 .09.58.03.6-.15l.94-8.22c0-.03-.1-.04-.1-.04l-7.94-.86L9.33 50.3l-2.9-.3c-.12-.02-.47.04-.49.2L5 58.41l.05.04 10.25 1.9c2.75.5 5.6.4 8.4.48l4.87.16c.13 0 .68-.24.38-.25"
+            fill="#6A79A8"
+          />
+          <path fill="#FFF" d="M18.6 62l-3.6-.4.4-3.6 3.6.4-.4 3.6" />
+          <path
+            d="M17.55 61.72l-1.47-.18-1.06-.13c-.12-.02-.24-.04-.35-.04-.13 0-.14-.06-.12 0 .03.09.1-.44.1-.5l.12-1.14.17-1.67-.5.23 1.48.17 1.06.13.35.05c.13 0 .14.05.12 0-.03-.1-.1.44-.1.49l-.12 1.14-.17 1.68c-.01.1.58.03.6-.18l.34-3.34c0-.04-.1-.05-.1-.06L14.82 58c-.13-.01-.47.05-.49.23L14 61.57c0 .04.1.06.1.06l3.07.37c.14.02.69-.25.38-.28M20.64 48.8c.18-1.6 1.34-2.79 2.46-3.9a11.87 11.87 0 0 0 2.82-3.8 14.1 14.1 0 0 0 .17-10.39c-.53-1.45-1.37-2.94-2.84-3.7-.16-.07-.76.16-.53.28 1.37.7 2.15 2.1 2.66 3.43.52 1.33.83 2.75.94 4.17.15 2.03-.15 4.09-.91 5.99a11.64 11.64 0 0 1-2.9 4.04c-1.15 1.13-2.33 2.35-2.5 3.97-.03.2.62.09.63-.09M4 30.28c.35 1.8.51 3.64.94 5.43a11.43 11.43 0 0 0 2.34 4.71 21 21 0 0 0 4.32 3.92c1.52 1.05 4.34 2.23 3.7 4.5-.08.25.54.18.6-.05.56-1.95-1.35-3.2-2.8-4.09a21.88 21.88 0 0 1-4.86-4.05c-1.31-1.5-2.2-3.09-2.67-5-.45-1.82-.62-3.69-.96-5.52-.05-.25-.66-.1-.6.15"
+            fill="#6A79A8"
+          />
+        </g>
+      </svg>
+    </div>
+
+    <div class="upgrade-plans__item-included-plus">unlimited plus:</div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Enforce phone verification for people in your Workspace"
+      tooltipLifeTime="15000"
+    >
+      Two factor <b>Authentication</b>
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Add and enforce Google SSO for people in your Workspace"
+      tooltipLifeTime="15000"
+    >
+      <b>Google</b> SSO
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Create private Portfolios and share them with others!"
+      tooltipLifeTime="15000"
+    >
+      Share <b>Portfolios</b>
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Group aligned goals into folders for the ultimate OKR powerhouse!"
+      tooltipLifeTime="15000"
+    >
+      <b>Goal</b> folders
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Easily build custom reports and export them in the format of your choice"
+      tooltipLifeTime="15000"
+    >
+      Advanced exporting
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Control who can make changes to views - and protect them to prevent unwanted changes"
+      tooltipLifeTime="15000"
+    >
+      <b>Protect</b> views
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="See who's overloaded and who needs more tasks so you can manage resources like never before"
+      tooltipLifeTime="15000"
+    >
+      <b>Workload</b> chart
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Choose which view users will see first"
+      tooltipLifeTime="15000"
+    >
+      Set <b>Default</b> views
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Create personal views that only you can see"
+      tooltipLifeTime="15000"
+    >
+      <b>Private</b> views
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      [cuTooltip]="
+        'You\'ll always get unlimited view-only guests. Plus you\'ll get ' +
+        businessGuestsBase +
+        ' guests and ' +
+        businessGuestsPerSeat +
+        ' more for each additional member.\n Note: You can always buy ' +
+        businessGuestsPerSeat +
+        ' more guests for just ' +
+        currencySymbol +
+        (businessLocalPrice | number: '1.0-2') +
+        ' per month.'
+      "
+      tooltipLifeTime="25000"
+    >
+      <b>{{ businessGuestsBase }} Guests</b> + {{ businessGuestsPerSeat }} per
+      extra seat
+    </div>
+
+    <div
+      *ngIf="planId !== businessPlan || (planId === businessPlan && isTrial)"
+    >
+      <div
+        *ngIf="planId !== enterprisePlan"
+        class="upgrade-plans__item-btn"
+        (click)="goToStepTwo('business')"
+      >
+        upgrade
+      </div>
+      <div
+        *ngIf="planId == enterprisePlan"
+        (click)="downgradePlan(businessPlan)"
+        class="upgrade-plans__item-btn"
+      >
+        downgrade
+      </div>
+    </div>
+    <div *ngIf="planId === businessPlan">
+      <div class="upgrade-plans__item-btn upgrade-plans__item-btn_active">
+        <svg width="19" height="15" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.918 11.202L1.48 6.764 0 8.244l5.918 5.917L18.6 1.48 17.12 0z"
+            fill-rule="evenodd"
+          />
+        </svg>
+        {{ isTrial ? 'trial' : 'active' }}
+      </div>
+      <div
+        *ngIf="!downgrading"
+        (click)="startDowngrade()"
+        class="upgrade-plans__downgrade"
+      >
+        downgrade plan
+      </div>
+      <div *ngIf="downgrading" class="billing__cancel-plan">
+        <a class="billing__cancel-plan-link" id="intercom-launcher"
+        >Cancel plan</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="upgrade-plans__item">
+    <div class="upgrade-plans__item-title">enterprise</div>
+
+    <ng-container *ngIf="planId === enterprisePlan">
+      <div class="upgrade-plans__item-cost">
+        <div class="upgrade-plans__item-cost-value" [@interval]="interval">
+          <div class="upgrade-plans__item-cost-value-symbol">
+            {{ currencySymbol }}
+          </div>
+          <span
+            *ngIf="planId === enterprisePlan && isTrial"
+          >{{ enterpriseLocalPrice | number: '1.0-2' }}</span
+          >
+          <span
+            *ngIf="planId === enterprisePlan && !isTrial"
+          >{{ ppu | number: '1.0-2' }}</span
+          >
+        </div>
+      </div>
+      <div class="upgrade-plans__item-period">member per month</div>
+    </ng-container>
+
+    <div
+      class="upgrade-plans__item-enterprise-img"
+      [ngClass]="{
+        'upgrade-plans__item-enterprise-img_active': planId === enterprisePlan
+      }"
+    >
+      <svg viewBox="0 0 148 160" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fill-rule="evenodd">
+          <path
+            d="M111.26 47.29c12.28 33.35 7.15 70.39-10.3 99.71-28.7-6.98-56.14-16.2-79.96-40.53 29.36-26.1 67.4-67.5 69.3-66.45 4.56 2.47 11.9 6.28 16.98 7.24 1.67.32 2.66 1.11 3.98.03"
+            fill="#E5E1F6"
+          />
+          <path
+            d="M110.01 45.76c9.26 25.19 8.67 53.21-.47 78.35-2.6 7.13-5.88 14-9.76 20.52l.98-.33c-22.37-5.43-44.5-12.66-63.39-26.28a127.37 127.37 0 0 1-16.14-13.89l-.09.35c14.43-12.8 28.12-26.42 41.76-40.06 5.58-5.57 11.13-11.17 16.76-16.7a272 272 0 0 1 5.9-5.65c1.15-1.07 2.32-2.22 3.63-3.11.14-.1.45-.29.45-.28 0-.14-.18.15-.22.02.01.04-.12-.25-.02.05.05.15.73.4.89.48 2.37 1.27 4.77 2.49 7.23 3.6 2.41 1.1 4.9 2.11 7.46 2.78 1.99.5 4.21 1.49 6.06.16.7-.5-.39-.65-.78-.37-1 .72-2.42-.01-3.51-.25-1.26-.27-2.5-.64-3.7-1.08a69.65 69.65 0 0 1-6.96-3c-1.07-.52-2.13-1.06-3.18-1.6-.82-.43-1.79-1.18-2.67-1.42-.47-.13-.9.01-1.33.23-1.12.58-2.1 1.54-3.02 2.37-1.8 1.6-3.55 3.28-5.29 4.96-12.27 11.91-24.18 24.2-36.43 36.14a701.08 701.08 0 0 1-24.04 22.53c-.1.08-.2.23-.08.35a127.62 127.62 0 0 0 29.21 22.15c10.1 5.57 20.88 9.75 31.88 13.12 6.22 1.9 12.52 3.55 18.84 5.08.29.07.82-.06.98-.33 13.62-22.88 19.68-50.26 15.97-76.75a109.1 109.1 0 0 0-5.65-22.48c-.16-.44-1.42-.07-1.27.34"
+            fill="#6A79A8"
+          />
+          <path
+            d="M112 107.54c.04-.33-19.59-6.96-22.98-7.98-7.28-2.18-28.22-11.52-28.3-11.55-.27-.12-.39.93-.4 1.05-.17 1.1-.2 2.2-.25 3.31a134.5 134.5 0 0 0-.07 5.17 427.53 427.53 0 0 0 .77 22.42 448.22 448.22 0 0 0 1.31 16.54c.26 2.51.54 5.01.88 7.51.3 2.15.63 4.3 1.03 6.44a47.1 47.1 0 0 0 1.18 4.95c.32 1.06.7 2.14 1.32 3.05.47.7 1.33.9 1.59-.06 1.04-3.92 2.5-7.78 3.75-11.66 1.44-4.54 2.86-9.09 4.27-13.64l3.55-11.5.78-2.6c.1-.31.53-2.1 1.15-1.74.7.4-.33 2.82-.5 3.4l-1.18 4.04-3.3 11.26c-1.2 4.04-2.38 8.08-3.56 12.13-.87 2.99-1.74 5.98-2.57 8.98-.15.52-.71 1.7-.58 2.25.08.32.36.6.68.67.75.17 1.44-.7 1.9-1.17 3.53-3.7 7.16-7.3 10.62-11.08a223.3 223.3 0 0 0 4.99-5.69c1.65-1.93 3.2-4.01 4.92-5.87l.1-.12c4.8-5.84 9.28-11.93 13.32-18.34 1.66-2.63 3.42-5.18 4.79-7.99.33-.69.67-1.42.79-2.18"
+            fill="#D1D1D1"
+          />
+          <path
+            d="M112 106.52c.05-.33-19.83-6.96-23.27-7.98C81.36 96.36 62.11 87.92 62.1 88c-.46 3.31.83 28.86 1 31.6.16 2.8 2.18 36.94 2.82 37.85.47.7 1.35.9 1.6-.06 1.06-3.93 2.55-7.79 3.8-11.67 1.47-4.54 2.9-9.09 4.33-13.64l3.59-11.5c.27-.87.52-1.74.8-2.6.1-.32.48-1.5 1.15-1.75 4.18-1.57-2.27 16.44-3.38 20.19-1.2 4.04-8.09 22.48-7.76 22.56.76.17 1.46-.7 1.92-1.17 3.58-3.7 7.25-7.3 10.76-11.09 1.72-1.86 3.39-3.77 5.05-5.68 1.67-1.94 3.23-4.02 4.98-5.88l.1-.12c4.87-5.84 9.4-11.93 13.5-18.34 1.67-2.63 3.45-5.18 4.84-8a7.9 7.9 0 0 0 .8-2.18"
+            fill="#E5E5E5"
+          />
+          <path
+            d="M60.15 88.97a.88.88 0 0 0-.13.68c.1.39.7.55 1.02.72.44.23.91.38 1.34.64.44.26.9.48 1.35.73 2.17 1.23 4.34 2.45 6.53 3.65a179.27 179.27 0 0 0 9.6 4.86l1.65.74c.47.2 1 .35 1.38.69 1.67 1.46 4.1 2.09 6.2 2.73 4.64 1.42 9.31 2.73 14.02 3.93 1.03.27 2.08.47 3.05.89 1 .43 2.24.7 3.34.77.9.05 1.66-.9 1.47-1.82-.2-.94-1.16-1.08-1.94-1.26-8.09-1.83-16.57-3.31-24.14-6.43-4.92-2.03-9.63-4.5-14.28-7.09-.79-.26-1.57-.88-2.3-1.29l-2.34-1.33c-1.4-.8-2.65-1.7-4.01-2.54-.17-.1-.35-.21-.55-.24-.5-.06-1.02.57-1.26.97"
+            fill="#D1D1D1"
+          />
+          <path
+            d="M60.17 89.76c6.6 3.85 13.22 7.67 20 11.2a62.4 62.4 0 0 0 8.07 3.63c3.55 1.25 7.16 2.3 10.77 3.34 3.68 1.06 7.37 2.07 11.07 3.05.52.14 1.35-.62.65-.8a344.98 344.98 0 0 1-20.49-5.94c-6.55-2.19-12.58-5.72-18.6-9.1-3.54-1.99-7.07-4.02-10.59-6.07-.46-.27-1.45.35-.88.69"
+            fill="#6A79A8"
+          />
+          <path
+            d="M110.99 107.07c-.1-.3-.65-.44-.9-.54-.76-.31-1.53-.59-2.3-.87a433.6 433.6 0 0 0-7.6-2.67c-4.48-1.53-9-2.92-13.46-4.47-5.7-1.99-11.17-4.75-16.59-7.4a561.1 561.1 0 0 1-7.22-3.6c-.88-.44-2.05-1.35-3.04-1.5-1.11-.18-1.27 1.14-1.42 1.95-.36 1.98-.4 4-.43 6.01-.1 5.42.06 10.84.28 16.25.43 10.81 1 21.7 2.47 32.42a148 148 0 0 0 1.32 8.03c.45 2.31.88 4.8 2 6.9.57 1.1 1.85 2.1 2.9.85.34-.4.5-1 .67-1.5 1.4-3.92 2.64-7.91 3.92-11.88 2.93-9.13 5.57-18.41 8.83-27.43.05-.12.16-.3.16-.44.02-.27.43-.2-.22.07l-.76.02c-.14-.12-.68 1.82-.68 1.83-.27.98-.56 1.96-.85 2.94-.6 2.08-1.21 4.15-1.83 6.23L72.7 140.3c-1.2 4.1-2.38 8.21-3.54 12.33-.45 1.6-.9 3.18-1.2 4.81-.19 1.04-.32 2.26.97 2.52.87.18 1.72-.27 2.37-.81 1.24-1.06 2.26-2.54 3.36-3.75 2.73-3 5.5-5.97 8.22-8.97a238.55 238.55 0 0 0 14.65-17.56c2.57-3.44 5.03-6.97 7.35-10.6 1.13-1.79 2.3-3.56 3.4-5.38 1.06-1.76 2.28-3.66 2.71-5.71.12-.57-1.16-.39-1.26.12-.38 1.81-1.46 3.51-2.39 5.08-1 1.68-2.08 3.31-3.12 4.96a177.25 177.25 0 0 1-6.06 8.96 215.77 215.77 0 0 1-13.42 16.62c-2.53 2.85-5.11 5.64-7.68 8.44l-3.6 3.93c-.57.62-1.15 1.24-1.7 1.89-.4.46-.76 1.07-1.25 1.44-.57.44-1.32.54-1.43-.33-.02-.18.05-.45.08-.64.11-.71.25-1.44.42-2.14.46-1.86 1.03-3.69 1.55-5.53 1.1-3.86 2.22-7.71 3.35-11.56l3.62-12.27c.6-2.07 1.21-4.13 1.8-6.2.14-.45 1.23-2.93.69-3.37-.2-.16-.56-.07-.76.02-.57.24-.73 1.32-.9 1.83-.53 1.54-1.03 3.09-1.53 4.63-1.58 4.88-3.13 9.76-4.68 14.63-1.57 4.91-3.13 9.82-4.74 14.7-.5 1.53-1 3.05-1.54 4.55-.24.68-.3 1.37-1 .46-.66-.87-.96-2.28-1.24-3.33a50.73 50.73 0 0 1-.9-3.98c-1.94-10.19-2.67-20.55-3.28-30.9-.31-5.3-.54-10.6-.67-15.91-.1-4.81-.45-9.87.25-14.65.07-.46.38-1.21.31-1.66l.03-.1c.14-.36-.14-.4-.84-.1h.02c.02.04.12.06.15.08.36.31.95.5 1.37.7 1.98 1.02 3.97 2.01 5.96 3a259.89 259.89 0 0 0 16.27 7.56c3.84 1.58 7.85 2.72 11.78 4.04 4.73 1.6 9.48 3.14 14.14 4.95l.74.3c.23.09.27.23.2 0 .17.53 1.42.18 1.26-.33"
+            fill="#6A79A8"
+          />
+          <path
+            d="M70.75 98.35a9.35 9.35 0 0 1-4.51 5.34c-.73.38.41.37.73.2A10.15 10.15 0 0 0 72 98.14c.09-.27-1.13-.13-1.25.2M98.04 108.52c-.18 2.92.22 5.74 1.17 8.27.19.5.97.02.75-.56a18.96 18.96 0 0 1-1.09-7.81c.05-.66-.8-.48-.83.1"
+            fill="#6A79A8"
+          />
+          <path
+            d="M60 86.53c2.1-5.89 4.75-11.59 7.7-17.1a133.74 133.74 0 0 1 8.11-13.2c.82-1.16 2.25-2.44 2.84-3.7.57-1.2-.02-2.54-.29-3.71 1.43-.75 3.03-.86 4.5-1.47 1.31-.56 2.08-1.97 3.14-2.92a30.25 30.25 0 0 1 7.14-4.95c4.65-2.2 9.7-2.07 13.8 1.23.4.33.78.67 1.15 1.03 10.58 10.31 8.94 39.54 4.35 67.26 0 0-22.79-7.1-30.03-10.35C76.28 95.88 60 86.53 60 86.53"
+            fill="#E5E5E5"
+          />
+          <path
+            d="M119.28 30.05c3.65-11.75 1.3-22.83-5.27-24.76-6.56-1.93-14.84 6.03-18.5 17.77l-.65 2.1C92.83 31.69 91.99 36.4 92 39.85c.03 7.1 7.2 12.16 7.2 12.16s9.05-.24 12.95-5.43c2.14-2.84 4.28-7.37 6.47-14.41l.66-2.1"
+            fill="#E5E5E5"
+          />
+          <path
+            d="M62 88.8c3.4-9.46 9.6-23.22 16.62-33.9.42-.63-.34-.51-.88-2.04-.35-1.02-.51-3.97-.51-3.97 2.33-.48 5.1-.8 6.68-2.68.07-.1.17-.2.3-.2.2-.03.35.21.43.42 1.37 3.43 3.91 6.32 6.64 8.78 2.9 2.62 6.16 5.23 10.13 5.93.4.07 2.5-1.99 2.9-1.93 1.51.24 1.33 2.56 3.14 2.9 2.6.51 6.35-4.87 6.35-4.87 2.51 13.7.76 33.08-2.36 51.76 0 0-22.77-7.03-30-10.27C75.3 96 62 88.8 62 88.8"
+            fill="#FFF"
+          />
+          <path
+            d="M113 53.8l-1.42-5.05-7.29 2.85L89.15 42c-.68.5-1.47.94-2.07 1.51-.63.6 2.6 6 4.21 8.15 1.48 1.98 5 5.12 6.94 6.64.81.64 1.44 1.13 2.42 1.56.07.03 1.43.61 1.44.57l2.32-4.98c1.44 2.49 3.2 5.54 3.22 5.55 0 0 4.95-2.21 5.37-7.2"
+            fill="#FFF"
+          />
+          <path
+            d="M117.73 32.54l.62-2.13c3.5-11.92 1.25-23.16-5.03-25.12-2.72-.85-4.74.22-6.34 2.51a81.22 81.22 0 0 0-10.15 19.7c-.89 2.6-1.71 5.74-2.19 7.38-.51 1.76-1.63 5.83-1.63 5.83s-.76-.3-.81-.18l-.07.2c-1.12.06-2.1.36-2.13 1.22-.04 1.31.8 5.36 1.83 6.93.55.82 1.18 1.57 1.9 2.25 1.02.99 2.19 1.82 3.43 2.5a11.14 11.14 0 0 0 6.38 1.34c2.38-.14 7.28-3.06 8.26-5.62.3-.79.12-1.48-.33-2.09l.07-.1c2.05-2.87 4.1-7.48 6.19-14.62"
+            fill="#FFF"
+          />
+          <path
+            d="M104.02 54.83c1.06 1.69 2.09 3.39 3.18 5.05.14.2.7.1.88.02 3.05-1.28 5.54-3.63 5.92-6.63.06-.47-1.27-.27-1.32.14-.34 2.64-2.4 4.85-5.13 6l.87.02c-.98-1.5-2.07-3.3-3.08-4.9-.25-.4-1.53-.04-1.32.3"
+            fill="#6A79A8"
+          />
+          <path
+            d="M103.72 53.06l-1.99 5.45 1.14-.29c-2.09-1.04-4.01-2.43-5.81-3.84-3.95-3.1-7.55-6.73-9.71-11.12-.26-.52-1.56-.17-1.32.32 2.14 4.34 5.57 7.9 9.43 11.02a36.15 36.15 0 0 0 6.39 4.32c.32.16 1 .1 1.14-.29l1.98-5.45c.24-.65-1.07-.62-1.25-.12"
+            fill="#6A79A8"
+          />
+          <path
+            d="M102.26 64.1c-1.08 3.82-2.17 7.65-3.22 11.49-1.25 4.53-3.21 8.52-6.04 11.6.13 1.41 2.16 6.37 1.92 7.81 1.02-.6 5.07-3.31 6.12-3.97 2.09-1.3 3.55-13.62 3.74-17.3.1-1.84.76-10.18-.83-10.57l-.58-.14c-.46-.11-.94.33-1.09.98l-.02.1"
+            fill="#DDD"
+          />
+          <path
+            d="M103.6 64.2c-.79 3.95-1.59 7.9-2.35 11.86-.91 4.69-2.6 8.88-5.25 12.23.25 1.41 2.74 6.23 2.6 7.71 1.01-.7 4.95-3.79 5.96-4.54 2.04-1.5 2.53-14.05 2.43-17.77-.06-1.87-.06-10.34-1.72-10.6l-.61-.08c-.48-.07-.94.41-1.04 1.09 0 .03 0 .06-.02.1"
+            fill="#B2A3F6"
+          />
+          <path
+            d="M102.6 64.67c-.73 3.76-1.47 7.52-2.17 11.28a36.83 36.83 0 0 1-3.02 9.74c-.35.72-.74 1.42-1.17 2.1-.27.43-1.13 1.27-1.22 1.78-.12.63.4 1.55.61 2.12.68 1.76 2.03 4.01 1.97 5.98-.02.44.55.37.77.2 1.23-.9 2.4-1.87 3.58-2.82.88-.7 2.09-1.38 2.77-2.32.62-.85.85-2.06 1.07-3.08.35-1.68.55-3.4.7-5.12.55-5.9.82-12.26-.07-18.15-.14-.96-.31-2.64-1.25-3.15-1.18-.64-2.36.13-2.58 1.44-.08.5.86.4.93-.07.13-.78.76-1.02 1.23-.56.33.33.45 1.03.55 1.48.32 1.37.43 2.81.51 4.22a98.67 98.67 0 0 1-.28 15.18 46.89 46.89 0 0 1-.6 4.41c-.19.97-.38 2.19-.94 3.01-.64.95-1.9 1.63-2.77 2.33-1.15.92-2.28 1.86-3.46 2.73l.77.2c.06-1.93-1.14-4.03-1.82-5.76-.18-.47-.37-.94-.53-1.42-.22-.65-.27-.7.15-1.3.82-1.14 1.53-2.39 2.15-3.68a36.23 36.23 0 0 0 2.78-9.04c.74-3.93 1.5-7.86 2.26-11.8.1-.5-.84-.39-.93.07"
+            fill="#6A79A8"
+          />
+          <path
+            d="M104.03 58.31c.27-.33.61-.47 1.09-.06.68.6 1.14 1.62 1.58 2.38.37.63.54 1.07-.36 1.27-.8.17-1.75.07-2.57.1-1.3.05-.62-2.01-.34-2.59.17-.34.35-.8.6-1.1"
+            fill="#BBDFF5"
+          />
+          <path
+            d="M103.95 58.59c.27-.31 1.7 2.44 1.82 2.7.09.18.2.35.25.53.11.43-.07.47-.46.56-.57.13-1.27.05-1.86.03-.91-.02-.82-.9-.64-1.68.17-.74.48-1.53.9-2.14.22-.35-.7-.25-.86 0-.59.88-1.28 2.43-1.06 3.56.1.51.43.75.9.8.9.09 1.96.07 2.86-.12.44-.1 1.15-.31 1.2-.91.05-.67-.66-1.63-.96-2.17-.65-1.21-1.77-2.54-2.94-1.16-.25.29.66.22.85 0M103.03 37.53c.99.68 1.58 1.78 2.45 2.6.85.8 1.8.96 2.88.83.52-.07 1.03-.7.2-.59-2.02.25-2.92-2.28-4.41-3.32-.31-.22-1.34.33-1.12.48"
+            fill="#6A79A8"
+          />
+          <path
+            d="M118.86 12.8c1.18-.86 3.12-2.33 3.38-3.8.34 1.72.21 3.6.5 5.38.16.98.32 1.98.24 2.98a8.27 8.27 0 0 1-1.81 4.24 24.6 24.6 0 0 1-3.33 3.35c.15.17.38-.12.4-.34l.37-2.82c-.21.15-.9.36-1.12.51l-1.4 1.02a2.2 2.2 0 0 0 .36-1.99l-.33-.04c-.62.58-1.44.74-2.25 1.04l.46-.05c.06-.47.02-.96-.11-1.42-.25-.88-.88-1.62-1.11-2.5-.37-1.33.26-1.12 1.02-2.1 1.15-1.45 3.25-2.37 4.73-3.46M93.27 8.39l.66-.6c-1.86 0-3.46-.62-5.19-1.2 1.85.5 3.84.22 5.67-.37 6.05-1.95 11.43-6.45 18.06-6.21 2.62.1 4.88 1.52 6.64 3.38 1.48 1.57 4.13 3.96 2.22 5.95a30.17 30.17 0 0 1-16.8 8.86c-.94.16-2 .1-2.79.6-.39.25-1.73 1.64-1.77 2.09.02-.22-.36-2.73-.67-2.55a8.96 8.96 0 0 0-2.8 2.5c-.62.88-.26 2.5-1.06 3.16-1.3-.7-1.12-2.47-1.12-3.71 0-1.08-2.1.1-2.47.3-.98.49-3.44 1.01-3.94 1.86l2.4-4.02a73.2 73.2 0 0 1-4.31 0c1.17.04 2.99-1.91 3.72-2.7a18.67 18.67 0 0 0 2.95-3.76c-.68-.01-1.35.2-2.05.11-.73-.09-1.47-.46-1.8-1.12 1.6-.7 3.1-1.44 4.45-2.57"
+            fill="#BBDFF5"
+          />
+          <path
+            d="M80.79 56.33c-1.98-2.1-2.37-5.19-2.5-7.94l-.54.57A17.1 17.1 0 0 1 81.6 48a3.37 3.37 0 0 0 2.45-1.1c2.52-2.34 5.06-4.82 8.15-6.41.13-.07.37-.21.37-.4.01-5.71 1.76-11.34 3.43-16.75 1.8-5.82 4.94-12.06 10.1-15.65 1.87-1.3 4.17-2.26 6.48-1.77 2.2.48 3.85 2.13 4.92 4.03 3.16 5.63 2.43 13.13.84 19.1-1.62 6.07-3.58 12.63-7.32 17.78-.39.52.92.5 1.21.1 3.59-4.93 5.37-11.08 7.08-16.84 1.87-6.32 2.77-14.24-.43-20.31-2.23-4.23-6.62-5.89-11.06-4.02-5.55 2.33-9.29 8.15-11.56 13.43a72.68 72.68 0 0 0-3.39 10.6c-.87 3.4-1.59 6.9-1.6 10.43l.38-.4c-3.06 1.58-5.57 3.93-8.09 6.24-.32.3-1 .72-1.2 1.12-.1.22.71-.09.18-.12-.3-.03-.65.08-.95.1-1.4.16-2.73.56-4.05 1.01-.27.1-.55.25-.54.57.13 2.82.57 5.98 2.6 8.12.37.39 1.59-.11 1.19-.53"
+            fill="#6A79A8"
+          />
+          <path
+            d="M76.32 53.07a122.98 122.98 0 0 0-18.29 33.15c-.06.16-.04.37.13.47a408.25 408.25 0 0 0 19.79 10.78c7.64 3.82 16.04 6.24 24.15 8.85 2.78.9 5.55 1.78 8.34 2.64.38.12.93-.04 1-.49a265.2 265.2 0 0 0 3.22-26.64c.49-7.75.58-15.62-.59-23.32a42.44 42.44 0 0 0-2.74-10.24c-.2-.45-.9-.4-1.17-.04a11.2 11.2 0 0 1-2.44 2.36c-2.13 1.52-4.18 1.11-6.46.08-4.26-1.92-7.13-5.81-9.82-9.47-.37-.5-1.57.02-1.16.57 3.11 4.24 6.52 8.66 11.73 10.37 2.18.72 4.08.68 6.05-.57 1.2-.76 2.31-1.78 3.17-2.92l-1.17-.04c2.63 6.2 3.35 13.11 3.57 19.78.27 8.39-.35 16.8-1.33 25.13a315 315 0 0 1-2.15 15.03l1-.49c-6.75-2.09-13.5-4.26-20.18-6.58-3.63-1.26-7.32-2.5-10.8-4.17-4.19-2-8.26-4.26-12.32-6.5a690.97 690.97 0 0 1-8.73-4.89l.13.48A122 122 0 0 1 77.4 53.49c.5-.64-.69-.91-1.07-.42M146.51 25.75c.98-.01 2.33-1.18.8-1.66-1.69-.53-2.2 1.49-2.74 2.54a92.06 92.06 0 0 1-8.4 13.01c-5.59 7.44-12.67 14-21.8 16.92-.84.27-.06.56.47.39 7.04-2.25 13.08-6.62 18.02-11.94a78.11 78.11 0 0 0 7.57-9.8c1.12-1.66 2.23-3.34 3.28-5.05a58.4 58.4 0 0 0 2.75-5c.1-.57.3-.57.57 0-.4 0-1.36.6-.52.6"
+            fill="#6A79A8"
+          />
+          <path
+            d="M77.79 52.18a124.33 124.33 0 0 1-18.6 13.46 146.62 146.62 0 0 1-16.08 8.29c-1.66.73-5.31 3.03-6.84 1.59-.39-.37-1.6.15-1.18.55 1.35 1.27 2.57 1.07 4.16.42A153.14 153.14 0 0 0 57.9 67.4c7.44-4.28 14.5-9.21 20.95-14.9.58-.52-.67-.67-1.06-.33M32.82 84.27c-5.46 7.56-12.6 13.28-20.48 17.87-.77.44-.08 1.12.56.76 8.06-4.7 15.4-10.52 20.99-18.26.48-.67-.73-.85-1.07-.37M17.77 93.24C13 98.12 6.8 101.18.37 103.5c-.84.3-.07.64.48.44 6.7-2.42 13.12-5.63 18.1-10.71.33-.35-.92-.26-1.18 0M21.74 112.15c-2.86 1.81-5.18 4.2-7.6 6.47-.56.52.8.44 1.1.16 2.43-2.27 4.74-4.65 7.6-6.47.62-.4-.77-.37-1.1-.16M102.85 22.13c-1.89-1.67-4.78-3.37-7.41-3.1-1.58.16-3.6 2.33-1.61 3.49.49.28 1.66-.39 1.03-.75-1.1-.63-.15-1.67.66-1.78.82-.1 1.77.26 2.52.55 1.41.53 2.66 1.35 3.78 2.34.43.38 1.6-.25 1.03-.75M113 25.57c-.37-2.1-3.8-1.93-4.98-.44-.15.2.5.16.57.15.28-.03.64-.12.8-.33.85-1.08 2.08.1 2.22.93.05.28 1.45.03 1.39-.3"
+            fill="#6A79A8"
+          />
+          <path
+            d="M108.05 20.32l.12 2.92c0 .11.06.21.16.27l2.51 1.56c.24.15.2.5-.06.6l-2.79 1.01a.34.34 0 0 0-.2.23l-.74 2.84a.34.34 0 0 1-.6.12l-1.83-2.29a.34.34 0 0 0-.3-.13l-2.96.2a.34.34 0 0 1-.3-.52l1.64-2.43c.07-.1.08-.21.04-.31l-1.1-2.72c-.11-.25.13-.52.4-.44l2.86.78c.1.03.22.01.3-.06l2.29-1.87c.22-.18.55-.04.56.24"
+            fill="#F9E280"
+          />
+          <path
+            d="M106.01 20.71c.04.92-.18 2.34.17 3.18.19.44.7.64 1.08.88.35.23 1.48.68 1.65 1.06.1.23-.93.48-1.26.6-.46.18-1.1.3-1.5.6-.44.31-.47.76-.59 1.24-.1.37-.67 1.73-.52 2.07.12.26.25-.02.22-.2-.04-.23-.49-.63-.64-.82-.33-.43-.65-1.04-1.07-1.38-.95-.76-2.38.3-3.38-.07-.33-.13-.2.14-.12-.23.04-.21.38-.58.5-.75.33-.5.86-1.08 1.08-1.65.16-.43.02-.66-.14-1.05-.22-.57-.41-1.6-.81-2.06-.15-.17-.65-.35-.2-.13.35.16.79.22 1.15.32.53.15 1.13.44 1.68.43.62 0 1.02-.48 1.46-.85l.93-.78c.12-.1.25-.2.36-.31.37-.37-.01.05-.04-.01.18.42 1.18.11 1-.27-.64-1.5-2.47.6-3.08 1.1-.17.16-.36.38-.57.5.27-.16.35 0 .08-.1-.17-.07-.36-.1-.53-.15-.68-.2-1.4-.5-2.1-.6-1.9-.26-.96 1.61-.59 2.55.24.61.56 1.03.25 1.62-.37.71-.95 1.3-1.32 2.01-.79 1.51 1.58 1.04 2.34.99.28-.02.74-.13 1.02-.07.29.07.02-.04.28.23.58.58.96 1.36 1.53 1.95 1.09 1.15 1.7-.22 1.95-1.2.12-.47.23-1.63.46-1.9.25-.3 1.52-.56 2.01-.74.45-.17 1.4-.4 1.23-1.09-.13-.52-1.13-.9-1.52-1.15-.7-.45-1.3-.56-1.33-1.42l-.1-2.45c-.02-.5-1.03-.3-1.02.1"
+            fill="#6A79A8"
+          />
+          <path
+            d="M118.22 24.27l.6 2.85c.03.1.1.2.2.24l2.77 1.14c.26.1.28.46.04.6l-2.61 1.43a.33.33 0 0 0-.17.26l-.26 2.9c-.03.28-.37.4-.58.22L116 31.95a.35.35 0 0 0-.31-.08l-2.92.66c-.28.06-.51-.21-.4-.47l1.25-2.65a.33.33 0 0 0-.02-.3l-1.55-2.5c-.15-.24.05-.54.33-.5l2.98.32c.12.01.23-.03.3-.11l1.97-2.2c.18-.21.54-.12.6.15"
+            fill="#F9E280"
+          />
+          <path
+            d="M118.17 22.78c.19.89.17 2.6.86 3.26.27.26.76.37 1.1.5.35.16 1.62.45 1.82.77.06.1-.99.63-1.29.8-.42.23-1.06.46-1.4.82-.33.36-.3.78-.33 1.23-.05.58-.34 1.53-.19 2.1.05.16.33.08.28-.05-.03-.08-.19-.14-.23-.2-.15-.26-.52-.48-.74-.68-.37-.34-.8-.89-1.25-1.11-1.1-.55-2.38.69-3.47.51-.3-.04-.06.08.06-.23.1-.24.22-.47.33-.71.25-.55.68-1.2.82-1.8.1-.47-.1-.7-.33-1.09-.34-.56-.67-1.42-1.14-1.88-.16-.16-.56-.19-.2-.1.4.1.86.1 1.27.14.54.06 1.22.25 1.76.14.58-.1.87-.57 1.23-.98l.87-1c.08-.1.19-.2.26-.3.39-.53.03.05-.04-.05.24.37 1.22-.01.93-.45-.9-1.38-2.43 1-2.95 1.6-.16.17-.31.42-.5.56.25-.19.35-.04.07-.1-.18-.04-.37-.04-.56-.06-.71-.08-1.48-.27-2.2-.25-1.93.05-.59 1.77-.09 2.6.36.58.67.83.5 1.45-.24.8-.83 1.48-1.05 2.28-.43 1.53 1.65.8 2.4.63.37-.09.86-.3 1.24-.3.37.02-.09-.1.21.14.66.53 1.21 1.21 1.9 1.71 1.26.93 1.65-.4 1.74-1.4l.12-1.42s.06-.67-.05-.5c.3-.46 1.63-.92 2.1-1.2.44-.23 1.23-.59.89-1.22-.26-.48-1.3-.68-1.74-.87-.82-.35-1.32-.33-1.5-1.18l-.48-2.38c-.1-.46-1.12-.2-1.03.27"
+            fill="#6A79A8"
+          />
+        </g>
+      </svg>
+    </div>
+
+    <div class="upgrade-plans__item-included-plus">business plus:</div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Google, Microsoft Azure, Okta, and custom SAML SSO"
+      tooltipLifeTime="15000"
+    >
+      <b>Single Sign-On</b> (SSO)
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Receive an executed BAA"
+      tooltipLifeTime="15000"
+    >
+      <b>HIPAA</b> Compliance
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="If you need changes to any legal agreements an Enterprise Plan with at least $5,000 commitment is required"
+      tooltipLifeTime="15000"
+    >
+      Contract & <b>legal review</b>
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Don't worry about being limited with the Enterprise Plan"
+      tooltipLifeTime="15000"
+    >
+      Increased <b>API limits</b>
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Receive personalized onboarding & training for you and your Workspace"
+      tooltipLifeTime="15000"
+    >
+      <b>Custom</b> onboarding
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="A dedicated ClickUp guru will get to know your team and make sure you're super productive!"
+      tooltipLifeTime="15000"
+    >
+      <b>Dedicated</b> success manager
+    </div>
+
+    <div
+      class="upgrade-plans__item-included"
+      cuTooltip="Restrict who can delete items and enforce security protocols such as SSO."
+      tooltipLifeTime="15000"
+    >
+      <b>Advanced</b> permissions
+    </div>
+
+    <div
+      *ngIf="
+        planId !== enterprisePlan || (planId === enterprisePlan && isTrial)
+      "
+      class="upgrade-plans__contact"
+    >
+      <div class="upgrade-plans__contact-link" (click)="contactSales()">
+        Contact Sales
+      </div>
+    </div>
+
+    <div *ngIf="planId === enterprisePlan">
+      <div class="upgrade-plans__item-btn upgrade-plans__item-btn_active">
+        <svg width="19" height="15" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.918 11.202L1.48 6.764 0 8.244l5.918 5.917L18.6 1.48 17.12 0z"
+            fill-rule="evenodd"
+          />
+        </svg>
+        {{ isTrial ? 'trial' : 'active' }}
+      </div>
+      <div
+        *ngIf="!downgrading"
+        (click)="startDowngrade()"
+        class="upgrade-plans__downgrade"
+      >
+        downgrade plan
+      </div>
+      <div *ngIf="downgrading" class="billing__cancel-plan">
+        <a class="billing__cancel-plan-link" id="intercom-launcher"
+        >Cancel plan</a
+        >
+      </div>
+    </div>
+  </div>
 </div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
